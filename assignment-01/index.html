@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Assignment #1</title>
+</head>
+<body>
+
+	<script>
+		var doc = document,
+			dbody = doc.body,
+			bannerEl = doc.createElement("banner"),
+			leftEl = doc.createElement("left"),
+			rightEl = doc.createElement("right"),
+			bannerTag = dbody.appendChild(bannerEl),
+			leftTag = dbody.appendChild(leftEl),
+			rightTag = dbody.appendChild(rightEl);
+		
+		bannerEl.appendChild(doc.createTextNode("Banner"));
+		leftEl.appendChild(doc.createTextNode("Left"));
+		rightEl.appendChild(doc.createTextNode("Right"));
+
+		dbody.style.margin = "0 auto";
+		dbody.style.width = "960px";
+
+		bannerTag.style.height = "200px";
+		bannerTag.style.backgroundColor = "green";
+		bannerTag.style.display = "block";
+		bannerTag.style.marginBottom = "10px";
+
+		leftTag.style.height = "300px";
+		leftTag.style.width = "49%";
+		leftTag.style.backgroundColor = "yellow";
+		leftTag.style.cssFloat = "left";
+		leftTag.style.display = "block";
+		leftTag.style.marginRight = "1%";
+
+		rightTag.style.height = "300px";
+		rightTag.style.width = "50%";
+		rightTag.style.backgroundColor = "blue";
+		rightTag.style.cssFloat = "left";
+		rightTag.style.display = "block";
+		rightTag.style.marginRight = "0";
+
+
+		
+	</script>	
+</body>
+</html>
