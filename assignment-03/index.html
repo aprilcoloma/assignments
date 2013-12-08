@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Assignment 3</title>
+    </head>
+    <body>
+        <script>
+            // Instructions
+            // 1. See preview png, assignment-3-preview.png
+            // 2. Only the Script tag contents should be edited.
+            // 3. You must not edit the variable MyWebsite.
+            // 4. You must use "for" loop to iterate the pages > titles and generate the nav element and its content
+            // 5. You will create a toSlug function to generate the hrefs of the anchors, based on the title.
+            // 6. Add an Event Listener to the Anchors and when clicked, the title, h1 and the url should be updated.
+            // 7. Lols
+
+            var MyWebsite = {
+                pages: [
+                    {
+                        title: 'Home'
+                    },
+                    
+                    {
+                        title: 'About Us'
+                    },
+                    
+                    {
+                       title: 'Contact Us'
+                    }
+                ]
+            };
+
+            var doc = document,
+                dbody = doc.body,
+                scriptEl = doc.getElementsByTagName('script')[0], //script tag
+                nav, //navigation
+                ulEl, //UL tag
+                liEl, //li tags
+                pageTitle, //page title tag
+                mainTitle, //main title tag
+                pagesTitles,
+                linkEl,
+                dynamicTitle,
+                tagValue,
+                titleItem;
+
+
+            titleEl = doc.getElementsByTagName('title')[0].innerHTML;
+
+            //create Nav tag
+            nav = doc.createElement('nav');
+            nav = dbody.insertBefore(nav, scriptEl);
+            nav.setAttribute("id", "nav");
+
+
+            //create Main Title tag
+            mainTitle = doc.createElement('h1');
+            mainTitle.setAttribute("id", "main-title");
+            mainTitle = dbody.insertBefore(mainTitle, nav.nextSibling);
+
+
+            //toSlug function
+            var toSlug = function(value) {
+                var slug = value.replace(/\W+/gi, "-").toLowerCase().replace(/(^-|-$)/gi, '');
+                return slug;
+            };
+
+            
+            
+
+            //MyWebsites titles array
+            pagesTitles = MyWebsite.pages;
+            ulEl = doc.createElement('ul');
+            nav.appendChild(ulEl);
+        
+            for (var i = 0; i < pagesTitles.length; i++) {
+                titleItem = pagesTitles[i];
+                // console.log(titleItem);
+
+                
+                liEl = doc.createElement('li');
+                linkEl = doc.createElement('a');
+
+                var createdTitle = doc.createTextNode(titleItem.title),
+                    createdTitleValues = createdTitle.data;
+
+                
+                ulEl.appendChild(liEl);
+                liEl.appendChild(linkEl);
+                linkEl.setAttribute('href', '#' + toSlug(createdTitleValues));
+                linkEl.appendChild(createdTitle);
+
+             
+                // mainTitle.innerHTML = titleItem.title;
+                mainTitle.innerHTML = "Home";
+
+
+                var itemTitle = liEl.childNodes[0].innerHTML;
+
+
+            }
+
+            var navTag = doc.getElementById('nav'),
+                liTag = navTag.children[0].children,
+                liLen = liTag.length;
+
+
+
+            for (var x = 0; x < liLen; x++) {
+
+                pageTitle = doc.getElementsByTagName('title')[0];
+                tagValue = liTag[x];
+
+                var changeValues = function() {
+                    dynamicTitle = this.textContent;
+                    mainTitle.innerHTML = dynamicTitle;
+                    pageTitle.innerHTML = dynamicTitle;
+                }
+
+                tagValue.addEventListener("click", changeValues);
+
+            }
+        </script>
+    </body>
+</html>
