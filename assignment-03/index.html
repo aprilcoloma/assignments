@@ -33,7 +33,7 @@
 
             var doc = document,
                 dbody = doc.body,
-                scriptEl = doc.getElementsByTagName('script')[0], //script tag
+                scriptEl = doc.getElementsByTagName("script")[0], //script tag
                 nav, //navigation
                 ulEl, //UL tag
                 liEl, //li tags
@@ -46,41 +46,37 @@
                 titleItem;
 
 
-            titleEl = doc.getElementsByTagName('title')[0].innerHTML;
+            titleEl = doc.title;
 
             //create Nav tag
-            nav = doc.createElement('nav');
+            nav = doc.createElement("nav");
             nav = dbody.insertBefore(nav, scriptEl);
-            nav.setAttribute("id", "nav");
+            nav.id = "nav";
 
 
             //create Main Title tag
-            mainTitle = doc.createElement('h1');
-            mainTitle.setAttribute("id", "main-title");
+            mainTitle = doc.createElement("h1");
+            mainTitle.id = "main-title";
             mainTitle = dbody.insertBefore(mainTitle, nav.nextSibling);
 
 
             //toSlug function
             var toSlug = function(value) {
-                var slug = value.replace(/\W+/gi, "-").toLowerCase().replace(/(^-|-$)/gi, '');
+                var slug = value.replace(/\W+/gi, "-").toLowerCase().replace(/^-|-$/gi, "");
                 return slug;
             };
 
-            
-            
 
             //MyWebsites titles array
             pagesTitles = MyWebsite.pages;
-            ulEl = doc.createElement('ul');
+            ulEl = doc.createElement("ul");
             nav.appendChild(ulEl);
         
             for (var i = 0; i < pagesTitles.length; i++) {
                 titleItem = pagesTitles[i];
-                // console.log(titleItem);
-
                 
-                liEl = doc.createElement('li');
-                linkEl = doc.createElement('a');
+                liEl = doc.createElement("li");
+                linkEl = doc.createElement("a");
 
                 var createdTitle = doc.createTextNode(titleItem.title),
                     createdTitleValues = createdTitle.data;
@@ -88,38 +84,30 @@
                 
                 ulEl.appendChild(liEl);
                 liEl.appendChild(linkEl);
-                linkEl.setAttribute('href', '#' + toSlug(createdTitleValues));
+                linkEl.setAttribute("href", "#" + toSlug(createdTitleValues));
                 linkEl.appendChild(createdTitle);
-
-             
-                // mainTitle.innerHTML = titleItem.title;
-                mainTitle.innerHTML = "Home";
-
 
                 var itemTitle = liEl.childNodes[0].innerHTML;
 
-
             }
 
-            var navTag = doc.getElementById('nav'),
-                liTag = navTag.children[0].children,
-                liLen = liTag.length;
+            //set the default title
+            mainTitle.innerHTML = pagesTitles[0].title;
 
-
+            var liEl = nav.children[0].children,
+                liLen = liEl.length;
 
             for (var x = 0; x < liLen; x++) {
 
-                pageTitle = doc.getElementsByTagName('title')[0];
-                tagValue = liTag[x];
+                tagValue = liEl[x];
 
                 var changeValues = function() {
                     dynamicTitle = this.textContent;
                     mainTitle.innerHTML = dynamicTitle;
-                    pageTitle.innerHTML = dynamicTitle;
+                    titleEl = dynamicTitle;
                 }
 
                 tagValue.addEventListener("click", changeValues);
-
             }
         </script>
     </body>
